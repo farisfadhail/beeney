@@ -2,8 +2,10 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Like;
+use App\Models\Dislike;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Reply extends Model
 {
@@ -19,5 +21,15 @@ class Reply extends Model
     public function Post()
     {
         return $this->belongsTo(Post::class);
+    }
+
+    public function Like()
+    {
+        return $this->hasMany(Like::class);
+    }
+
+    public function Dislike()
+    {
+        return $this->hasMany(Dislike::class);
     }
 }

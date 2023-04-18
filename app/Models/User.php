@@ -3,7 +3,9 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Models\Like;
 use App\Models\Post;
+use App\Models\Dislike;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -47,5 +49,15 @@ class User extends Authenticatable
     public function Post()
     {
         return $this->hasMany(Post::class);
+    }
+
+    public function Like()
+    {
+        return $this->hasMany(Like::class);
+    }
+
+    public function Dislike()
+    {
+        return $this->hasMany(Dislike::class);
     }
 }
