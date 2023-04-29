@@ -5,7 +5,7 @@
 Lakukan kode berikut pada gitbash teman-teman:
 
 1. Masuk ke folder yang diinginkan untuk meletakkan proyek, klik kanan, Open with Git Bash.
-2. Ketik ```git clone -b {{nama branch}} {{link http/ssh repo laos-be}}``` lalu tekan Enter. Tunggu hingga seluruh download dan publishing selesai.
+2. Ketik ```git clone -b {{nama branch}} {{link http/ssh repo project-ppl}}``` lalu tekan Enter. Tunggu hingga seluruh download dan publishing selesai.
 3. Ketik ```cd {{folder clone}}``` untuk pindah ke folder tempat clone projek
 4. Buka Git Bash lagi lalu jalankan ```composer i```. Tunggu hingga instalasi dependency composer selesai.
 5. Ketik ```cp .env.example .env``` untuk copy .env.example menjadi .env. Hal ini dikarenakan .env tidak bisa masuk ke Github karena gitignore. Tapi gapapa
