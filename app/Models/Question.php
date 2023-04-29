@@ -2,18 +2,17 @@
 
 namespace App\Models;
 
-use App\Models\User;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 
-class Post extends Model
+class Question extends Model
 {
     use HasFactory;
 
     protected $fillable = [
         'user_id',
         'title',
-        'post_detail',
+        'question_detail',
         'created_date'
     ];
 
@@ -25,5 +24,10 @@ class Post extends Model
     public function Reply()
     {
         return $this->hasMany(Reply::class);
+    }
+
+    public function Tag()
+    {
+        return $this->hasMany(Tag::class);
     }
 }

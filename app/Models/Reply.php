@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Models\Like;
 use App\Models\Dislike;
+use App\Models\Question;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -13,14 +14,14 @@ class Reply extends Model
 
     protected $fillable = [
         'user_id',
-        'post_id',
+        'question_id',
         'reply_body',
         'created_date'
     ];
 
-    public function Post()
+    public function Question()
     {
-        return $this->belongsTo(Post::class);
+        return $this->belongsTo(Question::class);
     }
 
     public function Like()
