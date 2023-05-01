@@ -16,6 +16,16 @@ class Question extends Model
         'created_date'
     ];
 
+    public function getIncrementing()
+    {
+        return false;
+    }
+
+    public function getKeyType()
+    {
+        return 'string';
+    }
+
     public function User()
     {
         return $this->belongsTo(User::class);

@@ -13,7 +13,7 @@ class ReplyController extends Controller
      */
     public function index()
     {
-        //
+        $replies = Reply::where()
     }
 
     /**

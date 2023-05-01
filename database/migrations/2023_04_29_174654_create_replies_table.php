@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
 
             $table->foreignId('user_id')->constrained();
-            $table->foreignId('question_id')->constrained();
+            $table->foreignUuid('question_id')->constrained();
             $table->string('reply_body');
             $table->date('created_date');
 

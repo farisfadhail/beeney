@@ -13,7 +13,10 @@ class QuestionController extends Controller
      */
     public function index()
     {
-        //
+        $questions = Question::paginate(5);
+        return view('pages.question.index', [
+            'questions' => $questions
+        ]);
     }
 
     /**
@@ -35,9 +38,9 @@ class QuestionController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Question $question)
+    public function show(Question $question, $uuid)
     {
-        //
+
     }
 
     /**
