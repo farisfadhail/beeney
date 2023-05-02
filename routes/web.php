@@ -25,6 +25,9 @@ Route::view('/question', 'pages.question.index')->name('quest.question.index');
 Route::get('/question/{uuid}/replies', [ReplyController::class, 'show'])->name('quest.reply.show');
 
 Route::middleware('auth')->group(function () {
+    Route::get('/dashboard', function () {
+        return view('admin.dashboard');
+    })->name('dashboard');
     // Ini buat route::get yg lain
     //Route::resource('/question/{uuid}', QuestionController::class);
     //Route::resource('/question/{uuid}/replies', ReplyController::class);
@@ -43,7 +46,7 @@ Route::middleware('auth')->group(function () {
         Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
         Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
-        Route::resource('question', QuestionController::class);
+        Route::resource('/question', QuestionController::class);
     });
 
 });

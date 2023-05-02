@@ -25,7 +25,10 @@
                                 <td>{{ $user->name }}</td>
                                 <td>{{ $user->email }}</td>
                                 <td>
-                                    <div class="">
+                                    <div class="flex gap-4 justify-center">
+                                        <a href="#" class="btn btn-primary p-3">Detail</a>
+                                        <a href="#" class="btn btn-accent p-3">Edit</a>
+                                        <a href="#" class="btn btn-secondary p-3">Delete</a>
                                     </div>
                                 </td>
                             </tr>
