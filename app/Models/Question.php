@@ -9,11 +9,16 @@ class Question extends Model
 {
     use HasFactory;
 
+    protected $primaryKey = 'id';
+    protected $defaultIdValue = null;
+
+
     protected $fillable = [
         'user_id',
         'title',
-        'question_detail',
-        'created_date'
+        'body',
+        'created_date',
+        'watch'
     ];
 
     public function getIncrementing()

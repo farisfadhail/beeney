@@ -134,6 +134,9 @@
         </div>
     </div>
 
+    {{-- ckeditor --}}
+    <script src="https://cdn.ckeditor.com/ckeditor5/37.1.0/classic/ckeditor.js"></script>
+
     <!-- jQuery -->
 	<script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 

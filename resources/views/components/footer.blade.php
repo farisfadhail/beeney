@@ -1,5 +1,5 @@
 <footer
-    class="footer p-10 bg-base-200 text-base-content justify-between px-52 mt-12"
+    class="footer p-10 bg-base-200 text-base-content justify-between px-52 "
 >
     <div>
         <img src="../../images/Logo.png" alt="Logo" />
@@ -69,7 +69,7 @@
     </div>
 </footer>
 <div
-    class="md:footer hidden footer-center p-4 bg-base-300 text-base-content"
+    class="md:footer hidden footer-center justify-center p-4 bg-base-300 text-base-content"
 >
     <div class="w-full">
         <p>

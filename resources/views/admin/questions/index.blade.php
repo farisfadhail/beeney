@@ -14,37 +14,34 @@
                 <table id="example" class="stripe hover" style="width:100%; padding-top: 1em;  padding-bottom: 1em;">
                     <thead>
                         <tr>
-                            <th data-priority="1">Name</th>
-                            <th data-priority="2">Position</th>
-                            <th data-priority="3">Office</th>
-                            <th data-priority="4">Age</th>
-                            <th data-priority="5">Start date</th>
+                            <th data-priority="1">Title</th>
+                            <th data-priority="2">User</th>
+                            <th data-priority="3">Create</th>
                             <th data-priority="6">Action</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>Tiger Nixon</td>
-                            <td>System Architect</td>
-                            <td>Edinburgh</td>
-                            <td>61</td>
-                            <td>2011/04/25</td>
-                            <td>
-                                <div class="">
-                                </div>
-                            </td>
-                        </tr>
-
-                        <!-- Rest of your data (refer to https://datatables.net/examples/server_side/ for server side processing)-->
-
-                        <tr>
-                            <td>Donna Snider</td>
-                            <td>Customer Support</td>
-                            <td>New York</td>
-                            <td>27</td>
-                            <td>2011/01/25</td>
-                            <td>$112,000</td>
-                        </tr>
+                        @foreach ($questions as $question)
+                            <tr>
+                                <td>{{ $question->title }}</td>
+                                <td>
+                                    @foreach ($users as $user)
+                                        @if ($user->id === $question->user_id)
+                                            {{ $user->name }}
+                                        @endif
+                                    @endforeach
+                                </td>
+                                <td>{{ $question->created_date }}</td>
+                                <td class="flex gap-4">
+                                    <a href="{{ route('question.show', $question->id) }}" class="btn font-medium bg-primary border-none hover:bg-primary p-3">Detail</a>
+                                    <form action="{{ route('admin.question.destroy', $question->id) }}" method="POST">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn font-medium btn-secondary p-3">Delete</button>
+                                    </form>
+                                </td>
+                            </tr>
+                        @endforeach
                     </tbody>
 
                 </table>

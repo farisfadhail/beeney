@@ -16,6 +16,8 @@
         "vite": "^4.0.0"
     },
     "dependencies": {
-        "daisyui": "^2.51.6"
+        "daisyui": "^2.51.6",
+        "froala-editor": "^4.0.18",
+        "select2": "^4.1.0-rc.0"
     }
 }

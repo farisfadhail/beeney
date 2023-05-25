@@ -4,7 +4,7 @@
     <!-- Under Navbar -->
     <div class="flex flex-row md:justify-end justify-center gap-4">
         <a
-            href="#"
+            href="{{ route('question.create') }}"
             class="btn font-medium bg-green-700 border-none hover:bg-green-800 "
             >Mulai Diskusi</a
         >
@@ -75,141 +75,61 @@
     <div class="w-full bg-green-700 h-[1px] mt-4"></div>
 
     <!-- Questions -->
-    <a
-        href="replies.html"
-        class="card w-full bg-orange-50 shadow-md hover:shadow-xl transition-shadow my-8"
-    >
-        <div class="card-body">
-            <div class="flex justify-between gap-8">
-                <h2 class="card-title text-base">
-                    Apakah perubahan iklim berpengaruh terhadap
-                    produksi madu lebah madu hutan? Jika
-                    berpengaruh, apa solusi yang sebaiknya
-                    dilakukan?
-                </h2>
-                <div class="badge border-none bg-green-700">
-                    NEW
+    @foreach ($questions as $question)
+        <a
+            @if (Auth::check())
+                href="{{ route('question.show', $question->id) }}"
+            @else
+                href="{{ route('guest.question.show', $question->id) }}"
+            @endif
+            class="card w-full bg-orange-50 shadow-md hover:shadow-xl transition-shadow my-8"
+        >
+            <div class="card-body">
+                <div class="flex justify-between gap-8">
+                    <h2 class="card-title text-base">
+                        {{ $question->title }}
+                    </h2>
+
+                    @if ($latestQuestion->id === $question->id)
+                        <div class="badge border-none bg-green-700">
+                            NEW
+                        </div>
+                    @endif
                 </div>
-            </div>
-            <div class="flex gap-2">
-                <div class="badge badge-outline">Apis Dorsata</div>
-                <div class="badge badge-outline">Pemula</div>
-            </div>
-            <div class="card-actions justify-end">
-                <div class="flex">
-                    <img
-                        src="https://img.icons8.com/material-outlined/24/null/visible--v1.png"
-                        width="50%"
-                    />
-                    <div class="text-sm ml-2 min-w-full">12</div>
+                <div class="flex gap-2">
+                    {{--<div class="badge badge-outline">Apis Dorsata</div>
+                    <div class="badge badge-outline">Pemula</div>--}}
                 </div>
-                <div class="flex ml-4">
-                    <img
-                        src="https://img.icons8.com/ios-glyphs/30/null/speech-bubble--v1.png"
-                        width="40%"
-                    />
-                    <div class="text-sm ml-2 min-w-full">5</div>
-                </div>
-                <div class="flex ml-2">
-                    <img
-                        src="https://img.icons8.com/material-outlined/24/null/create.png"
-                        width="20%"
-                    />
-                    <div class="text-sm ml-2 min-w-full">
-                        12 April 2023
+                <div class="card-actions justify-end">
+                    <div class="flex">
+                        <img
+                            src="https://img.icons8.com/material-outlined/24/null/visible--v1.png"
+                            width="50%"
+                        />
+                        <div class="text-sm ml-2 min-w-full">{{ $question->watch }}</div>
+                    </div>
+                    <div class="flex ml-4">
+                        <img
+                            src="https://img.icons8.com/ios-glyphs/30/null/speech-bubble--v1.png"
+                            width="40%"
+                        />
+                        <div class="text-sm ml-2 min-w-full">
+                            {{ $questionCounts[$question->id] ?? 0 }}
+                        </div>
+                    </div>
+                    <div class="flex ml-2">
+                        <img
+                            src="https://img.icons8.com/material-outlined/24/null/create.png"
+                            width="20%"
+                        />
+                        <div class="text-sm ml-2 min-w-full">
+                            {{ $question->created_date }}
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </a>
-    <a
-        href="replies.html"
-        class="card w-full bg-orange-50 shadow-md hover:shadow-xl transition-shadow my-8"
-    >
-        <div class="card-body">
-            <div class="flex justify-between gap-8">
-                <h2 class="card-title text-base">
-                    Apakah perubahan iklim berpengaruh terhadap
-                    produksi madu lebah madu hutan? Jika
-                    berpengaruh, apa solusi yang sebaiknya
-                    dilakukan?
-                </h2>
-            </div>
-            <div class="flex gap-2">
-                <div class="badge badge-outline">Apis Dorsata</div>
-                <div class="badge badge-outline">Pemula</div>
-            </div>
-            <div class="card-actions justify-end">
-                <div class="flex">
-                    <img
-                        src="https://img.icons8.com/material-outlined/24/null/visible--v1.png"
-                        width="50%"
-                    />
-                    <div class="text-sm ml-2 min-w-full">12</div>
-                </div>
-                <div class="flex ml-4">
-                    <img
-                        src="https://img.icons8.com/ios-glyphs/30/null/speech-bubble--v1.png"
-                        width="40%"
-                    />
-                    <div class="text-sm ml-2 min-w-full">5</div>
-                </div>
-                <div class="flex ml-2">
-                    <img
-                        src="https://img.icons8.com/material-outlined/24/null/create.png"
-                        width="20%"
-                    />
-                    <div class="text-sm ml-2 min-w-full">
-                        12 April 2023
-                    </div>
-                </div>
-            </div>
-        </div>
-    </a>
-    <a
-        href="replies.html"
-        class="card w-full bg-orange-50 shadow-md hover:shadow-xl transition-shadow my-8"
-    >
-        <div class="card-body">
-            <div class="flex justify-between gap-8">
-                <h2 class="card-title text-base">
-                    Apakah perubahan iklim berpengaruh terhadap
-                    produksi madu lebah madu hutan? Jika
-                    berpengaruh, apa solusi yang sebaiknya
-                    dilakukan?
-                </h2>
-            </div>
-            <div class="flex gap-2">
-                <div class="badge badge-outline">Apis Dorsata</div>
-                <div class="badge badge-outline">Pemula</div>
-            </div>
-            <div class="card-actions justify-end">
-                <div class="flex">
-                    <img
-                        src="https://img.icons8.com/material-outlined/24/null/visible--v1.png"
-                        width="50%"
-                    />
-                    <div class="text-sm ml-2 min-w-full">12</div>
-                </div>
-                <div class="flex ml-4">
-                    <img
-                        src="https://img.icons8.com/ios-glyphs/30/null/speech-bubble--v1.png"
-                        width="40%"
-                    />
-                    <div class="text-sm ml-2 min-w-full">5</div>
-                </div>
-                <div class="flex ml-2">
-                    <img
-                        src="https://img.icons8.com/material-outlined/24/null/create.png"
-                        width="20%"
-                    />
-                    <div class="text-sm ml-2 min-w-full">
-                        12 April 2023
-                    </div>
-                </div>
-            </div>
-        </div>
-    </a>
+        </a>
+    @endforeach
     <div class="flex justify-center py-4">
         <div class="btn-group">
             <button class="btn btn-ghost">

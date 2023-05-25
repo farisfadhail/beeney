@@ -2,7 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
+use App\Models\Reply;
 use App\Models\Question;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Date;
 use App\Http\Requests\StoreQuestionRequest;
 use App\Http\Requests\UpdateQuestionRequest;
 
@@ -11,20 +17,31 @@ class QuestionController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Question $questions)
     {
-        $questions = Question::paginate(5);
+        $questions = Question::latest()->paginate(5);
+        $latestQuestion = Question::latest()->first();
+
+        $questionCounts = DB::table('questions')
+                ->leftJoin('replies', 'questions.id', '=', 'replies.question_id')
+                ->select('questions.id', DB::raw('COUNT(replies.id) as reply_count'))
+                ->groupBy('questions.id')
+                ->get()
+                ->pluck('reply_count', 'id');
+
         return view('pages.question.index', [
-            'questions' => $questions
+            'questions' => $questions,
+            'latestQuestion' => $latestQuestion,
+            'questionCounts' => $questionCounts
         ]);
     }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(Question $question)
     {
-        //
+        return view('pages.question.create');
     }
 
     /**
@@ -32,15 +49,30 @@ class QuestionController extends Controller
      */
     public function store(StoreQuestionRequest $request)
     {
-        //
+        $request->validated();
+
+        $question = Question::create([
+            "id" => Str::uuid(),
+            "user_id" => Auth::user()->id,
+            "title" => $request->title,
+            "body" => $request->body,
+        ]);
+
+        return redirect()->route("question.show", $question->id)->with("success", "Question berhasil dibuat");
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Question $question, $uuid)
+    public function show(Question $question, Reply $replies)
     {
+        $replies = Reply::where('question_id', $question->id)->get();
 
+        return view('pages.question.show', [
+            'question' => $question,
+            'replies' => $replies,
+            'users' => User::get()
+        ]);
     }
 
     /**
@@ -48,7 +80,9 @@ class QuestionController extends Controller
      */
     public function edit(Question $question)
     {
-        //
+        return view('pages.question.edit',[
+            'question' => $question
+        ]);
     }
 
     /**
@@ -56,7 +90,14 @@ class QuestionController extends Controller
      */
     public function update(UpdateQuestionRequest $request, Question $question)
     {
-        //
+        $request->validated();
+
+        $question->update([
+            "title" => $request->title,
+            "body" => $request->body,
+        ]);
+
+        return redirect()->route("question.index")->with("success", "Question berhasil diupdate");
     }
 
     /**
@@ -64,6 +105,8 @@ class QuestionController extends Controller
      */
     public function destroy(Question $question)
     {
-        //
+        $question->delete();
+
+        return redirect()->route("question.index")->with("success", "Question berhasil dihapus");
     }
 }

@@ -30,11 +30,25 @@
                     Langganan
                 </a>
                 <a
+                    href="{{ route('question.index') }}"
+                    class="block py-2 mt-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-green-700 md:p-0 md:dark:hover:text-green-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
+                >
+                    Pertanyaan
+                </a>
+                <a
                     href="#"
                     class="block py-2 mt-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-green-700 md:p-0 md:dark:hover:text-green-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
                 >
                     About
                 </a>
+                @role('admin')
+                    <a
+                        href="{{ route('admin.dashboard') }}"
+                        class="block py-2 mt-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-green-700 md:p-0 md:dark:hover:text-green-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
+                    >
+                        Dashboard
+                    </a>
+                @endrole
             </div>
         </div>
         <div class="flex md:order-2">
@@ -64,18 +78,78 @@
                     placeholder="Search..."
                 />
             </div>
-            <a
-                href="#"
-                class="hidden md:block mx-4 mt-2 text-green-500 border-green-600 border-2 hover:bg-green-700 hover:text-white transition-all font-medium rounded-lg text-sm px-4 py-2 text-center mr-3 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
-            >
-                Login
-            </a>
-            <a
-                href="#"
-                class="hidden md:block text-white mt-2 bg-green-700 hover:bg-green-800 font-medium rounded-lg text-sm px-4 py-2 text-center mr-3 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
-            >
-                Register
-            </a>
+            @if (Auth::check())
+                <a href="#" class="hidden md:block mx-2">
+                    <img src="https://img.icons8.com/material/96/C57C00/bookmark-ribbon--v1.png" class="w-6 mt-4 ml-4" />
+                </a>
+
+                <div class="md:dropdown dropdown-bottom dropdown-end hidden ml-2">
+                    <label tabindex="0">
+                        <img src="https://img.icons8.com/material/96/C57C00/bell--v1.png" class="w-6 mt-4 ml-2 cursor-pointer" />
+                    </label>
+                    <ul tabindex="0" class="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-72">
+                        <li>
+                            <label for="label cursor-pointer">
+                                <span class="label-text text-xs font-medium">"Udin" membalas : "izin menambahkan ka, jadi itu adalah lorem ipsum yang terbengkalai" </span>
+                                <span class="badge text-xs border-none bg-green-700">NEW</span>
+                            </label>
+                        </li>
+                        <li>
+                            <label class="label cursor-pointer">
+                                <span class="label-text text-xs font-medium">"Udin" membalas : "izin menambahkan ka, jadi itu adalah lorem ipsum yang terbengkalai" </span>
+                            </label>
+                        </li>
+                        <li>
+                            <label class="label cursor-pointer">
+                                <span class="label-text text-xs font-medium">"Udin" membalas : "izin menambahkan ka, jadi itu adalah lorem ipsum yang terbengkalai" </span>
+                            </label>
+                        </li>
+                        <li>
+                            <label class="label cursor-pointer">
+                                <span class="label-text text-xs font-medium">"Udin" membalas : "izin menambahkan ka, jadi itu adalah lorem ipsum yang terbengkalai" </span>
+                            </label>
+                        </li>
+                    </ul>
+                </div>
+
+                <!--<a href="#" class="mx-2 font-medium rounded-lg text-sm px-4 mt-2 text-center hidden md:block">
+                    <img src="https://img.icons8.com/material/96/15803D/user-male-circle--v1.png" alt="user" class="w-10" />
+                </a>-->
+
+                <div class="md:dropdown dropdown-bottom dropdown-end hidden">
+                    <label tabindex="0">
+                        <img src="https://img.icons8.com/material/96/15803D/user-male-circle--v1.png" alt="user" class="w-10 cursor-pointer mt-2 mx-4" />
+                    </label>
+                    <ul class="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-44">
+                        <li>
+                            <a href="#" for="label cursor-pointer">
+                                <span class="label-text font-medium" aria-current="page">Profile</span>
+                            </a>
+                        </li>
+                        <li>
+                            <form method="POST" action="{{ route('logout') }}">
+                                @csrf
+                                <a href="{{ route('logout') }}" for="label cursor-pointer" class="min-w-full" onclick="event.preventDefault(); this.closest('form').submit();">
+                                    <span class="label-text font-medium" aria-current="page">Logout</span>
+                                </a>
+                            </form>
+                        </li>
+                    </ul>
+                </div>
+            @else
+                <a
+                    href="{{ route('login') }}"
+                    class="hidden md:block mx-4 mt-2 text-green-500 border-green-600 border-2 hover:bg-green-700 hover:text-white transition-all font-medium rounded-lg text-sm px-4 py-2 text-center mr-3 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
+                >
+                    Login
+                </a>
+                <a
+                    href="{{ route('register') }}"
+                    class="hidden md:block text-white mt-2 bg-green-700 hover:bg-green-800 font-medium rounded-lg text-sm px-4 py-2 text-center mr-3 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
+                >
+                    Register
+                </a>
+            @endif
             <div
                 class="dropdown dropdown-bottom dropdown-end justify-end md:hidden"
             >

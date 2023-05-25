@@ -2,9 +2,8 @@
 
 namespace App\Models;
 
-use App\Models\Like;
-use App\Models\Dislike;
 use App\Models\Question;
+use App\Models\LikeDislike;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -24,13 +23,9 @@ class Reply extends Model
         return $this->belongsTo(Question::class);
     }
 
-    public function Like()
+    public function LikeDislike()
     {
-        return $this->hasMany(Like::class);
+        return $this->hasMany(LikeDislike::class);
     }
 
-    public function Dislike()
-    {
-        return $this->hasMany(Dislike::class);
-    }
 }

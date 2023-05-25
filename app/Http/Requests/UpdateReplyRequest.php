@@ -22,7 +22,7 @@ class UpdateReplyRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'reply_body' => 'required',
         ];
     }
 }

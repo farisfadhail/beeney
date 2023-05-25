@@ -3,8 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Reply;
+use App\Models\Question;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\StoreReplyRequest;
 use App\Http\Requests\UpdateReplyRequest;
+use Illuminate\Support\Facades\Date;
 
 class ReplyController extends Controller
 {
@@ -13,15 +16,17 @@ class ReplyController extends Controller
      */
     public function index()
     {
-        $replies = Reply::where();
+        //
     }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create($question_id)
     {
-        //
+        $question = Question::findOrFail($question_id);
+
+        return view('pages.replies.create', compact('question'));
     }
 
     /**
@@ -29,7 +34,16 @@ class ReplyController extends Controller
      */
     public function store(StoreReplyRequest $request)
     {
-        //
+        $request->validated();
+
+        $reply = Reply::create([
+            "user_id" => Auth::user()->id,
+            "question_id" => $request->question_id,
+            "reply_body" => $request->reply_body,
+            'created_date' => Date::now()
+        ]);
+
+        return redirect()->route("question.show", $request->question_id)->with("success", "Reply berhasil ditambahkan");
     }
 
     /**
@@ -45,7 +59,9 @@ class ReplyController extends Controller
      */
     public function edit(Reply $reply)
     {
-        //
+        return view('pages.replies.edit', [
+            'reply' => $reply
+        ]);
     }
 
     /**
@@ -53,7 +69,13 @@ class ReplyController extends Controller
      */
     public function update(UpdateReplyRequest $request, Reply $reply)
     {
-        //
+        $request->validated();
+
+        $reply->update([
+            "reply_body" => $request->reply_body
+        ]);
+
+        return redirect()->route("question.show", $request->question_id)->with("success", "Reply berhasil diubah");
     }
 
     /**
@@ -61,6 +83,15 @@ class ReplyController extends Controller
      */
     public function destroy(Reply $reply)
     {
-        //
+        $reply->delete();
+
+        return redirect()->route("question.index")->with("success", "Question berhasil dihapus");
+    }
+
+    public function createPage($question_id)
+    {
+        $question = Question::findOrFail($question_id);
+
+        return view('pages.replies.create')->with($question);
     }
 }

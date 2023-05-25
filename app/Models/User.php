@@ -3,15 +3,17 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Carbon\Carbon;
 use App\Models\Like;
 use App\Models\Post;
 use App\Models\Dislike;
 use App\Models\Question;
 use Laravel\Sanctum\HasApiTokens;
+use Spatie\Permission\Traits\HasRoles;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
 {
@@ -26,7 +28,6 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
-        'is_admin'
     ];
 
     /**
@@ -53,13 +54,34 @@ class User extends Authenticatable
         return $this->hasMany(Question::class);
     }
 
-    public function Like()
+    public function LikeDislike()
     {
-        return $this->hasMany(Like::class);
+        return $this->hasMany(LikeDislike::class);
     }
 
-    public function Dislike()
+    public function Article()
     {
-        return $this->hasMany(Dislike::class);
+        return $this->hasMany(Article::class);
+    }
+
+    public function getIsActiveAttribute()
+    {
+        if (!$this->LastActiveUserSubscription) {
+            return false;
+        }
+        $dateNow = Carbon::now();
+        $dateExpired = Carbon::create($this->LastActiveUserSubscription->expired_date);
+
+        return $dateNow->lessThanOrEqualTo($dateExpired);
+    }
+
+    /**
+     * Get the LastActiveUserSubscription associated with the User
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function LastActiveUserSubscription(): HasOne
+    {
+        return $this->hasOne(UserSubscription::class)->wherePaymentStatus('paid')->latest();
     }
 }

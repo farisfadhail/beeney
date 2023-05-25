@@ -20,9 +20,15 @@ class ReplySeeder extends Seeder
 
         $replies = [
             [
-                'user_id' => 1,
+                'user_id' => 2,
                 'question_id' => $uuid->id,
                 'reply_body' => 'Berdasarkan kabar burung yang saya dengar, madu tidak bisa bertambah kalau kita makan, karena jika kita memakan madu, madu akan berkurang',
+                'created_date' => Date::now()
+            ],
+            [
+                'user_id' => 2,
+                'question_id' => $uuid->id,
+                'reply_body' => 'Tapi ya kak, saya kok bingung ya, tadi orangnya 3 terus yg 2 kabur, yg 1 saya dan satunya kabur',
                 'created_date' => Date::now()
             ]
         ];

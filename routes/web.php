@@ -5,6 +5,10 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\QuestionController;
 use App\Http\Controllers\ReplyController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Admin\QuestionController as AdminQuestionController;
+use App\Http\Controllers\Admin\ReplyController as AdminReplyController;
+use App\Http\Controllers\Admin\ArticleController as AdminArticleController;
+use App\Http\Controllers\ArticleController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,35 +25,52 @@ Route::get('/', function () {
     return view('pages.welcome');
 });
 
-Route::view('/question', 'pages.question.index')->name('quest.question.index');
-Route::get('/question/{uuid}/replies', [ReplyController::class, 'show'])->name('quest.reply.show');
+Route::resource('/guest/question', QuestionController::class)->only('index', 'show');
 
-Route::middleware(['auth', 'role:user'])->name('user.')->group(function () {
-    Route::get('/dashboard', function () {
-        return view('admin.dashboard');
-    })->name('dashboard');
+Route::middleware('auth')->group(function () {
     // Ini buat route::get yg lain
-    //Route::resource('/question/{uuid}', QuestionController::class);
-    //Route::resource('/question/{uuid}/replies', ReplyController::class);
 
-});
-
-Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->group(function () {
     Route::get('/dashboard', function () {
-        return view('admin.dashboard');
+        return view('user.dashboard');
     })->name('dashboard');
 
-    Route::view('about', 'admin.about')->name('about');
-    Route::view('questions', 'admin.questions.index')->name('questions.index');
-
-    Route::get('users', [UserController::class, 'index'])->name('users.index');
+    //Route::get('/predict', function() {
+    //    return view('user.predict');
+    //})->name('predict');
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     Route::resource('/question', QuestionController::class);
+
+    Route::get('/question/{question}/reply/create', [ReplyController::class, 'create'])->name('reply.create');
+
+    Route::resource('/reply', ReplyController::class)->except('create');
+    Route::resource('/article', ArticleController::class);
+
+    Route::middleware('role:admin')->prefix('admin')->name('admin.')->group(function () {
+        Route::get('/dashboard', function () {
+            return view('admin.dashboard');
+        })->name('dashboard');
+
+        Route::view('about', 'admin.about')->name('about');
+        Route::view('questions', 'admin.questions.index')->name('questions.index');
+
+        Route::get('users', [UserController::class, 'index'])->name('users.index');
+
+        Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+        Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+        Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+        Route::resource('/question', AdminQuestionController::class);
+        Route::resource('/reply', AdminReplyController::class);
+        Route::resource('/article', AdminArticleController::class);
+    });
 });
+
+// Article =  user_id, thumbnail, title, article_body, bookmark, created_date, vote_like
+
 
 
 require __DIR__.'/auth.php';

@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Http\Controllers\admin;
+namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Question;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class QuestionController extends Controller
@@ -11,9 +12,14 @@ class QuestionController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Question $questions)
     {
-        //
+        $questions = Question::all();
+
+        return view('admin.questions.index', [
+            'questions' => $questions,
+            'users' => User::all()
+        ]);
     }
 
     /**
@@ -61,6 +67,8 @@ class QuestionController extends Controller
      */
     public function destroy(Question $question)
     {
-        //
+        $question->delete();
+
+        return redirect()->route("admin.question.index")->with("success", "Question berhasil dihapus");
     }
 }

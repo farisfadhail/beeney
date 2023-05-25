@@ -24,6 +24,8 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
             QuestionSeeder::class,
             ReplySeeder::class,
+            SubscriptionPlanSeeder::class,
+            ArticleSeeder::class
         ]);
     }
 }
