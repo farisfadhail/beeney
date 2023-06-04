@@ -16,15 +16,15 @@ class SubscriptionPlanSeeder extends Seeder
         $subscriptionPlans = [
             [
                 'name' => 'Basic',
-                'price' => 200000,
-                'active_period_in_months' => 6,
-                'features' => json_encode(['feature1', 'feature2', 'feature3'])
+                'price' => 0,
+                'active_period_in_months' => 0,
+                'features' => json_encode(['Hanya dapat Melihat dalam Fitur Artikel', 'Akses Penuh ke Fitur Forum Diskusi', 'Akses Penuh ke Fitur Komentar'])
             ],
             [
                 'name' => 'Premium',
-                'price' => 800000,
-                'active_period_in_months' => 12,
-                'features' => json_encode(['feature1', 'feature2', 'feature3', 'feature4', 'feature5', 'feature6'])
+                'price' => 19900,
+                'active_period_in_months' => 1,
+                'features' => json_encode(['Semua Fitur Pada Basic', 'Badge Lebah di Bagian Foto Frofil Anda', 'Akses Penuh Ke Fitur Prediksi', 'Akses Penuh Ke Fitur Artikel'])
             ],
         ];
 

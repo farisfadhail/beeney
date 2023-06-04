@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
+use App\Models\User;
 use App\Models\Article;
 use App\Http\Requests\StoreArticleRequest;
 use App\Http\Requests\UpdateArticleRequest;
@@ -13,7 +15,10 @@ class ArticleController extends Controller
      */
     public function index()
     {
-        //
+        $articles = Article::latest()->paginate();
+        $latestArticle = Article::latest()->first();
+
+        return view('pages.articles.index', compact('articles', 'latestArticle'));
     }
 
     /**
@@ -37,7 +42,13 @@ class ArticleController extends Controller
      */
     public function show(Article $article)
     {
-        //
+        $article = Article::find($article->id);
+        $user = User::where('id', $article->user_id)->get();
+        $thumbnail = $article->getFirstMediaUrl('images');
+
+        $this->increaseWatchCount($article->id);
+
+        return view('pages.articles.show', compact('article', 'user', 'thumbnail'));
     }
 
     /**
@@ -62,5 +73,12 @@ class ArticleController extends Controller
     public function destroy(Article $article)
     {
         //
+    }
+
+    public function increaseWatchCount($id)
+    {
+        $article = Article::findOrFail($id);
+        $article->watch += 1;
+        $article->save();
     }
 }

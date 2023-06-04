@@ -104,7 +104,7 @@
                     </div>
                 </div>
                 <div class="mt-2 w-full">
-                    <div class="font-semibold text-sm py-2">{{ $reply->created_at }}</div>
+                    <div class="font-semibold text-sm py-2">{{ $reply->created_at->format('F j, Y g:i A') }}</div>
                     <p>
                         {{ strip_tags($reply->reply_body) }}
                     </p>

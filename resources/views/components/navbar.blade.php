@@ -1,4 +1,4 @@
-<nav class="bg-white border-gray-200 dark:bg-gray-900">
+<nav class="bg-white border-gray-200 dark:bg-gray-900 relative">
     <div
         class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto py-4"
     >
@@ -19,28 +19,36 @@
             <div class="md:flex hidden gap-8">
                 <a
                     href="#"
-                    class="block py-2 mt-2 pl-3 pr-4 font-medium text-white bg-green-700 rounded md:bg-transparent md:text-green-700 md:p-0 md:dark:text-green-500"
+                    class="{{ request()->routeIs('landing.index') ? 'block py-2 mt-2 pl-3 pr-4 font-medium text-white bg-green-700 rounded md:bg-transparent md:text-green-700 md:p-0 md:dark:text-green-500' : 'block py-2 mt-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-green-700 md:p-0 md:dark:hover:text-green-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700' }}"
                     aria-current="page"
                     >Beranda</a
                 >
                 <a
-                    href="#"
-                    class="block py-2 mt-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-green-700 md:p-0 md:dark:hover:text-green-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
+                    href="{{ route('subscription.index') }}"
+                    class="{{ request()->routeIs('subscription.index') ? 'block py-2 mt-2 pl-3 pr-4 font-medium text-white bg-green-700 rounded md:bg-transparent md:text-green-700 md:p-0 md:dark:text-green-500' : 'block py-2 mt-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-green-700 md:p-0 md:dark:hover:text-green-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700' }}"
                 >
                     Langganan
                 </a>
                 <a
                     href="{{ route('question.index') }}"
-                    class="block py-2 mt-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-green-700 md:p-0 md:dark:hover:text-green-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
+                    class="{{ request()->routeIs('question.index') ? 'block py-2 mt-2 pl-3 pr-4 font-medium text-white bg-green-700 rounded md:bg-transparent md:text-green-700 md:p-0 md:dark:text-green-500' : 'block py-2 mt-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-green-700 md:p-0 md:dark:hover:text-green-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700' }}"
                 >
                     Pertanyaan
                 </a>
                 <a
-                    href="#"
-                    class="block py-2 mt-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-green-700 md:p-0 md:dark:hover:text-green-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
+                    href="{{ route('article.index') }}"
+                    class="{{ request()->routeIs('article.index') ? 'block py-2 mt-2 pl-3 pr-4 font-medium text-white bg-green-700 rounded md:bg-transparent md:text-green-700 md:p-0 md:dark:text-green-500' : 'block py-2 mt-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-green-700 md:p-0 md:dark:hover:text-green-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700' }}"
                 >
-                    About
+                    Article
                 </a>
+                @role('user')
+                    <a
+                        href="{{ route('dashboard') }}"
+                        class="block py-2 mt-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-green-700 md:p-0 md:dark:hover:text-green-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
+                    >
+                        Dashboard
+                    </a>
+                @endrole
                 @role('admin')
                     <a
                         href="{{ route('admin.dashboard') }}"
@@ -228,23 +236,76 @@
                 <ul
                     class="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-72"
                 >
+                @if (Auth::check())
                     <li>
                         <a
                             href="#"
-                            class="mx-4 mt-2 text-green-500 border-green-600 border-2 hover:bg-green-700 hover:text-white transition-all font-medium rounded-lg text-sm px-4 py-2 text-center mr-3 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
+                            class="{{ request()->routeIs('landing.index') ? 'block py-2 mt-2 pl-3 pr-4 font-medium text-white bg-green-700 rounded md:bg-transparent md:text-green-700 md:p-0 md:dark:text-green-500' : 'block py-2 mt-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-green-700 md:p-0 md:dark:hover:text-green-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700' }}"
+                            aria-current="page"
+                            >Beranda</a
                         >
-                            Login
-                        </a>
                     </li>
                     <li>
                         <a
                             href="#"
-                            type="button"
-                            class="text-white mt-2 mx-4 bg-green-700 hover:bg-green-800 font-medium rounded-lg text-sm px-4 py-2 text-center mr-3 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
+                            class="{{ request()->routeIs('subscription.index') ? 'block py-2 mt-2 pl-3 pr-4 font-medium text-white bg-green-700 rounded md:bg-transparent md:text-green-700 md:p-0 md:dark:text-green-500' : 'block py-2 mt-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-green-700 md:p-0 md:dark:hover:text-green-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700' }}"
                         >
-                            Register
+                            Langganan
                         </a>
                     </li>
+                    <li>
+                        <a
+                            href="{{ route('question.index') }}"
+                            class="{{ request()->routeIs('question.index') ? 'block py-2 mt-2 pl-3 pr-4 font-medium text-white bg-green-700 rounded md:bg-transparent md:text-green-700 md:p-0 md:dark:text-green-500' : 'block py-2 mt-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-green-700 md:p-0 md:dark:hover:text-green-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700' }}"
+                        >
+                            Pertanyaan
+                        </a>
+                    </li>
+                    <li>
+                        <a
+                            href="{{ route('article.index') }}"
+                            class="{{ request()->routeIs('article.index') ? 'block py-2 mt-2 pl-3 pr-4 font-medium text-white bg-green-700 rounded md:bg-transparent md:text-green-700 md:p-0 md:dark:text-green-500' : 'block py-2 mt-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-green-700 md:p-0 md:dark:hover:text-green-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700' }}"
+                        >
+                            Article
+                        </a>
+                    </li>
+                    <li>
+                        @role('admin')
+                            <a
+                                href="{{ route('admin.dashboard') }}"
+                                class="block py-2 mt-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-green-700 md:p-0 md:dark:hover:text-green-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
+                            >
+                                Dashboard
+                            </a>
+                        @endrole
+                    </li>
+                    <li>
+                        <a href="#" for="label cursor-pointer" class="block py-2 mt-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-green-700 md:p-0 md:dark:hover:text-green-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">
+                            Profile
+                        </a>
+                    </li>
+                    <li>
+                        <form method="POST" action="{{ route('logout') }}" class="block py-2 mt-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-green-700 md:p-0 md:dark:hover:text-green-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">
+                            @csrf
+                            <a href="{{ route('logout') }}" for="label cursor-pointer" onclick="event.preventDefault(); this.closest('form').submit();">
+                                Logout
+                            </a>
+                        </form>
+                    </li>
+                @else
+                    <a
+                        href="{{ route('login') }}"
+                        class="mx-4 mt-2 text-green-500 border-green-600 border-2 hover:bg-green-700 hover:text-white transition-all font-medium rounded-lg text-sm px-4 py-2 text-center mr-3 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
+                    >
+                        Login
+                    </a>
+                    <a
+                        href="{{ route('register') }}"
+                        class="text-white mt-2 mx-4 bg-green-700 hover:bg-green-800 font-medium rounded-lg text-sm px-4 py-2 text-center mr-3 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
+                    >
+                        Register
+                    </a>
+                @endif
                 </ul>
             </div>
         </div>

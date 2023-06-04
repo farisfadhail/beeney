@@ -17,10 +17,10 @@ return new class extends Migration
 
             // Article =  user_id, thumbnail, title, article_body, bookmark, created_date, vote_like
             $table->foreignId('user_id')->constrained();
-            $table->string('thumbnail');
-            $table->string('title');
+            $table->string('title')->unique();
             $table->longText('article_body');
-            $table->date("created_date")->default(Date::now());
+            $table->string('slug')->unique();
+            $table->bigInteger("watch")->default(0);
             //$table->bigInteger('vote_like')->default(0);
 
             $table->timestamps();

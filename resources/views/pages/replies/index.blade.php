@@ -1,4 +1,4 @@
-@extend('layouts.frontend')
+@extends('layouts.frontend')
 
 @section('content')
     <div class="w-full bg-green-700 h-[1px] mt-4"></div>

@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\QuestionController as AdminQuestionController;
 use App\Http\Controllers\Admin\ReplyController as AdminReplyController;
 use App\Http\Controllers\Admin\ArticleController as AdminArticleController;
 use App\Http\Controllers\ArticleController;
+use App\Http\Controllers\SubscriptionPlanController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,9 +24,13 @@ use App\Http\Controllers\ArticleController;
 
 Route::get('/', function () {
     return view('pages.welcome');
-});
+})->name('landing-page');
 
 Route::resource('/guest/question', QuestionController::class)->only('index', 'show');
+
+//Route::get('/article/{slug}', [ArticleController::class, 'showPage'])->name('guest.article.show');
+Route::resource('/guest/article', ArticleController::class)->only('index', 'show');
+Route::get('/subscription-plan', [SubscriptionPlanController::class, 'index'])->name('subscription.index');
 
 Route::middleware('auth')->group(function () {
     // Ini buat route::get yg lain
@@ -33,6 +38,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/dashboard', function () {
         return view('user.dashboard');
     })->name('dashboard');
+
+    Route::get('/subscription-plan/detail-payment/{id}', [SubscriptionPlanController::class, 'paymentPage'])->name('subscriptionPlan.payment-page');
+    Route::post('/subscription-plan/payment', [SubscriptionPlanController::class, 'payment'])->name('subscriptionPlan.payment')->middleware('checkUserSubscription:false');
 
     //Route::get('/predict', function() {
     //    return view('user.predict');

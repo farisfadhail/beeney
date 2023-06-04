@@ -16,25 +16,6 @@
             @enderror
         </div>
 
-        <div class="flex flex-col mt-8">
-            {{--<label for="multipleTags" class="text-2xl font-semibold mb-4">Tags</label>
-
-            <select class="form-control multipleTags" multiple>
-                <option selected="selected">orange</option>
-                <option>white</option>
-                <option>purple</option>
-            </select>--}}
-
-            {{--<select name="tags[]" id="tags" class="select select-bordered selectMultiple w-full" multiple="multiple">
-                <option value="">Pilih tags</option>
-                <option value="Badan Pengurus Harian">Badan Pengurus Harian</option>
-                <option value="Pemrograman">Pemrograman</option>
-                <option value="OS & Jaringan">OS & Jaringan</option>
-                <option value="Multimedia">Multimedia</option>
-                <option value="Humas">Humas</option>
-            </select>--}}
-        </div>
-
         <div class="flex justify-end my-4">
             <button type="submit" class="btn font-medium bg-green-700 border-none hover:bg-green-800 ">Beri balasan</button>
             <a href="{{ route("reply.index") }}"><button type="button" class="btn btn-outline btn-error ml-4">Batal</button></a>

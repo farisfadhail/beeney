@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use App\Models\User;
 use App\Models\Reply;
 use App\Models\Question;
@@ -68,10 +69,12 @@ class QuestionController extends Controller
     {
         $replies = Reply::where('question_id', $question->id)->get();
 
+        $this->increaseWatchCount($question->id);
+
         return view('pages.question.show', [
             'question' => $question,
             'replies' => $replies,
-            'users' => User::get()
+            'users' => User::get(),
         ]);
     }
 
@@ -108,5 +111,12 @@ class QuestionController extends Controller
         $question->delete();
 
         return redirect()->route("question.index")->with("success", "Question berhasil dihapus");
+    }
+
+    public function increaseWatchCount($id)
+    {
+        $question = Question::findOrFail($id);
+        $question->watch += 1;
+        $question->save();
     }
 }
