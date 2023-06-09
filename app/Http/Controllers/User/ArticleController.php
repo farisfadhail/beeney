@@ -43,13 +43,14 @@ class ArticleController extends Controller
     public function store(StoreArticleRequest $request)
     {
         //return $request;
-        $request->validated();
+        //$request->validated();
         $article = Article::create([
             'user_id' => Auth::id(),
             'title' => $request->title,
             'article_body' => $request->article_body,
             'slug' => Str::slug($request->title)
         ]);
+
         $article->addMediaFromRequest('thumbnail')->toMediaCollection('images');
         return redirect()->route('user.article.index');
     }

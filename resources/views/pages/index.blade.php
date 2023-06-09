@@ -113,7 +113,7 @@
                 <div class="lg:col-span-5">
                     <div class="xl:mt-12 justify-center text-center md:pt-40">
                         <p class="mb-6 text-gray-800 text-3xl">Beeney merupakan situs edukasi untuk peternak madu professional dan masyarakat umum. Asah pengetahuanmu dengan konten edukasi, diskusi dengan sesama peternak, dan siapkan panen dengan lebih baik menggunakan prediksi panen.</p>
-                        <a class="btn-solid-lg mr-1.5" href="#">Gabung dengan Kami</a>
+                        <a class="btn-solid-lg mr-1.5" href="#pricing">Gabung dengan Kami</a>
                     </div>
                 </div> <!-- end of col -->
             </div> <!-- end of container -->

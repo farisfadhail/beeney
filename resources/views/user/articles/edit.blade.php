@@ -6,11 +6,12 @@
     <div class="w-full bg-green-700 h-[1px] mt-4"></div>
 
     <!-- Form -->
-    <form method="POST" action="{{ route('user.article.store') }}" enctype="multipart/form-data" class="mt-8">
+    <form method="POST" action="{{ route('user.article.update', $article->id) }}" enctype="multipart/form-data" class="mt-8">
         @csrf
+        @method('PUT')
         <div class="flex flex-col mb-4">
             <label for="thumbnail" class="text-2xl font-semibold mb-4">Thumbnail</label>
-            {{--<img id="preview" class="my-2" width="500px">--}}
+            <img id="preview" class="my-2" width="500px">
             <input type="file" name="thumbnail" id="thumbnail" placeholder="Masukkan judul" />
             @error('thumbnail')
                 <small class="text-red-700">{{ $message }}</small>
@@ -19,7 +20,7 @@
 
         <div class="flex flex-col">
             <label for="title" class="text-2xl font-semibold mb-4">Judul</label>
-            <input value="{{ old('title') }}" type="text" name="title" id="title" placeholder="Masukkan judul" class="input input-bordered w-full" />
+            <input value="{{ old('title', $article->title) }}" type="text" name="title" id="title" placeholder="Masukkan judul" class="input input-bordered w-full" />
             @error('title')
                 <small class="text-red-700">{{ $message }}</small>
             @enderror
@@ -27,7 +28,7 @@
 
         <div class="flex flex-col mt-8">
             <label for="body" class="text-2xl font-semibold mb-4">Isi</label>
-            <textarea name="article_body" id="editor">{{ old('article_body') }}</textarea>
+            <textarea name="article_body" id="editor">{{ old('article_body', $article->article_body) }}</textarea>
             @error('body')
                 <small class="text-red-700">{{ $message }}</small>
             @enderror
@@ -56,7 +57,7 @@
         </div>
 
         <div class="flex justify-end my-4">
-            <button type="submit" class="btn font-medium bg-green-700 border-none hover:bg-green-800 ">Add Article</button>
+            <button type="submit" class="btn font-medium bg-green-700 border-none hover:bg-green-800 ">Update Article</button>
             <a href="{{ route("user.article.index") }}"><button type="button" class="btn btn-outline btn-error ml-4">Batal</button></a>
         </div>
     </form>

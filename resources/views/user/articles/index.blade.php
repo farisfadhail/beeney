@@ -9,7 +9,7 @@
 
             <!--Card-->
             <div id='recipients' class="p-8 mt-6 lg:mt-0 rounded shadow bg-white">
-                <a href="{{ route('admin.article.create') }}" class="btn font-medium btn-accent border-none py-3 px-6 mb-4">Create</a>
+                <a href="{{ route('user.article.create') }}" class="btn font-medium btn-accent border-none py-3 px-6 mb-4">Create</a>
 
                 <table id="example" class="stripe hover" style="width:100%; padding-top: 1em;  padding-bottom: 1em;">
                     <thead>
