@@ -147,10 +147,7 @@
                     ></path>
                 </svg>
             </button>
-            <button class="btn btn-ghost">1</button>
-            <button class="btn">2</button>
-            <button class="btn btn-ghost">3</button>
-            <button class="btn btn-ghost">4</button>
+            <button class="btn">1</button>
             <button class="btn btn-ghost">
                 <svg
                     aria-hidden="true"

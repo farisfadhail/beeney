@@ -18,7 +18,7 @@
 
     <div class="flex flex-col mt-8">
         <label for="body" class="text-2xl font-semibold mb-4">Isi</label>
-        <textarea name="article_body" class="" disabled>{{ strip_tags($article->article_body) }}</textarea>
+        <textarea name="article_body" class="">{{ $article->article_body }}</textarea>
     </div>
 
     <div class="flex flex-col mt-8">

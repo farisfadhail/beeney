@@ -26,7 +26,7 @@
                     </address>
                     <h1 class="mb-4 text-3xl font-extrabold leading-tight text-gray-900 lg:mb-6 lg:text-4xl dark:text-white">{{ $article->title }}</h1>
                 </header>
-                <p class="lead">{{ strip_tags($article->article_body) }}</p>
+                <div class="lead">{!! $article->article_body !!}</div>
                 {{--<figure>
                         <img src="https://flowbite.s3.amazonaws.com/typography-plugin/typography-image-1.png" alt="">
                         <figcaption>Digital art by Anonymous</figcaption>

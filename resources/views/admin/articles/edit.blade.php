@@ -71,6 +71,7 @@
             .catch( error => {
                 console.error( error );
             } );
+
         $(".multipleTags").select2({
             tags: true,
         })

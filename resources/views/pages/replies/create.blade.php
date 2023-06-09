@@ -17,14 +17,13 @@
         </div>
 
         <div class="flex justify-end my-4">
-            <button type="submit" class="btn font-medium bg-green-700 border-none hover:bg-green-800 ">Beri balasan</button>
-            <a href="{{ route("reply.index") }}"><button type="button" class="btn btn-outline btn-error ml-4">Batal</button></a>
+            <button type="submit" class="btn font-medium bg-green-700 border-none hover:bg-green-800 ">Tambah balasan</button>
+            <a href="{{ route('question.index') }}"><button type="button" class="btn btn-outline btn-error ml-4">Batal</button></a>
         </div>
     </form>
 
     <div class="w-full bg-green-700 h-[1px] my-4"></div>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
     <script src="https://cdn.ckeditor.com/ckeditor5/37.1.0/classic/ckeditor.js"></script>
     <script>
         ClassicEditor

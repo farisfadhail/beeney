@@ -22,10 +22,10 @@ class DatabaseSeeder extends Seeder
         $this->call([
             RoleSeeder::class,
             UserSeeder::class,
-            QuestionSeeder::class,
-            ReplySeeder::class,
             SubscriptionPlanSeeder::class,
-            ArticleSeeder::class
+            //QuestionSeeder::class,
+            //ReplySeeder::class,
+            //ArticleSeeder::class
         ]);
     }
 }

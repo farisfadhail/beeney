@@ -5,9 +5,9 @@
         <div
             class="flex flex-row font-medium p-0 mt-0 border-gray-100 rounded-lg space-x-8 border-0 bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700"
         >
-            <a href="#" class="flex items-center mr-8">
+            <a href="{{ route('landing-page') }}" class="flex items-center mr-8">
                 <img
-                    src="../../images/Logo.png"
+                    src="../../../images/Logo.png"
                     class="h-8 mr-3"
                     alt="Beeney Logo"
                 />
@@ -18,8 +18,8 @@
             </a>
             <div class="md:flex hidden gap-8">
                 <a
-                    href="#"
-                    class="{{ request()->routeIs('landing.index') ? 'block py-2 mt-2 pl-3 pr-4 font-medium text-white bg-green-700 rounded md:bg-transparent md:text-green-700 md:p-0 md:dark:text-green-500' : 'block py-2 mt-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-green-700 md:p-0 md:dark:hover:text-green-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700' }}"
+                    href="{{ route('landing-page') }}"
+                    class="{{ request()->routeIs('landing-page') ? 'block py-2 mt-2 pl-3 pr-4 font-medium text-white bg-green-700 rounded md:bg-transparent md:text-green-700 md:p-0 md:dark:text-green-500' : 'block py-2 mt-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-green-700 md:p-0 md:dark:hover:text-green-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700' }}"
                     aria-current="page"
                     >Beranda</a
                 >
@@ -130,7 +130,7 @@
                     </label>
                     <ul class="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-44">
                         <li>
-                            <a href="#" for="label cursor-pointer">
+                            <a href="{{ route('profile.edit') }}" for="label cursor-pointer">
                                 <span class="label-text font-medium" aria-current="page">Profile</span>
                             </a>
                         </li>

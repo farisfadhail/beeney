@@ -10,7 +10,7 @@
         @csrf
         <div class="flex flex-col mb-4">
             <label for="thumbnail" class="text-2xl font-semibold mb-4">Thumbnail</label>
-            <img id="preview" alt="preview image" width="200">
+            {{--<img id="preview" alt="preview image" width="200">--}}
             <input type="file" name="thumbnail" id="thumbnail" placeholder="Masukkan judul" />
             @error('thumbnail')
                 <small class="text-red-700">{{ $message }}</small>
@@ -57,7 +57,7 @@
 
         <div class="flex justify-end my-4">
             <button type="submit" class="btn font-medium bg-green-700 border-none hover:bg-green-800 ">Create Article</button>
-            <a href="{{ route("question.index") }}"><button type="button" class="btn btn-outline btn-error ml-4">Batal</button></a>
+            <a href="{{ route("article.index") }}"><button type="button" class="btn btn-outline btn-error ml-4">Batal</button></a>
         </div>
     </form>
 
@@ -71,6 +71,7 @@
             .catch( error => {
                 console.error( error );
             } );
+
         $(".multipleTags").select2({
             tags: true,
         })

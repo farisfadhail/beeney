@@ -16,11 +16,15 @@ class SubscriptionPlanController extends Controller
 {
     public function index()
     {
-        $subsciptionPlans = SubscriptionPlan::all();
+        $subscriptionPlans = SubscriptionPlan::all();
+        $subscription = UserSubscription::where('user_id', Auth::id())
+                ->where('expired_date', '>', Carbon::now())
+                ->first();
 
         return view('pages.subscriptions.index', [
-            'subscriptionPlans' => $subsciptionPlans,
-            'userSubscription' => null
+            'subscriptionPlans' => $subscriptionPlans,
+            'userSubscription' => null,
+            'subscription' => $subscription
         ]);
     }
 

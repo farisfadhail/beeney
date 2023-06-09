@@ -52,14 +52,16 @@ class QuestionController extends Controller
     {
         $request->validated();
 
-        $question = Question::create([
+        Question::create([
             "id" => Str::uuid(),
             "user_id" => Auth::user()->id,
             "title" => $request->title,
             "body" => $request->body,
         ]);
 
-        return redirect()->route("question.show", $question->id)->with("success", "Question berhasil dibuat");
+        $question = Question::latest()->get();
+
+        return redirect()->route("question.show", $question[0]->id)->with("success", "Question berhasil dibuat");
     }
 
     /**

@@ -3,8 +3,11 @@
 namespace App\Http\Middleware;
 
 use Closure;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use App\Models\UserSubscription;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Date;
 use Symfony\Component\HttpFoundation\Response;
 
 class CheckUserSubscription
@@ -14,13 +17,16 @@ class CheckUserSubscription
      *
      * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
      */
-    public function handle(Request $request, Closure $next, $status): Response
+    public function handle(Request $request, Closure $next): Response
     {
-        if ($status == 'true' && !Auth::user()->isActive) {
-            return redirect(route('subscription.index'));
+        $userSubscribe = UserSubscription::where('user_id', Auth::id())->first();
+
+        if (is_null($userSubscribe)) {
+            return redirect()->route('subscription.index');
         }
-        if ($status == 'false' && Auth::user()->isActive) {
-            return redirect(route('user.dashboard.index'));
+
+        if ($userSubscribe->expired_date < Date::now()) {
+            return redirect()->route('subscription.index');
         }
 
         return $next($request);

@@ -88,7 +88,7 @@
                             </div>
                         @endforeach
                         <div class="card-actions justify-end">
-                        <a href="{{ route('subscriptionPlan.payment-page', $plan->id) }}" class="btn bg-orange-400 border-orange-400 mt-4">Buy Now</a>
+                            <a href="{{ route('subscriptionPlan.payment-page', $plan->id) }}" class="btn bg-orange-400 border-orange-400 mt-4">Buy Now</a>
                     </div>
                 </div>
             </div>
