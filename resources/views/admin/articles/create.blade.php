@@ -11,7 +11,7 @@
         <div class="flex flex-col mb-4">
             <label for="thumbnail" class="text-2xl font-semibold mb-4">Thumbnail</label>
             {{--<img id="preview" alt="preview image" width="200">--}}
-            <input type="file" name="thumbnail" id="thumbnail" placeholder="Masukkan judul" />
+            <input type="file" name="thumbnail" id="thumbnail" />
             @error('thumbnail')
                 <small class="text-red-700">{{ $message }}</small>
             @enderror

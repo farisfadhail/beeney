@@ -74,7 +74,7 @@
                             <a class="nav-link page-scroll" href="#pricing">Pricing</a>
                         </li>
                         <li>
-                            <a class="nav-link page-scroll" href="#download">Discussion</a>
+                            <a class="nav-link page-scroll" href="{{ route('question.index') }}">Discussion</a>
                         </li>
                     </ul>
                     <span class="block lg:ml-3.5">

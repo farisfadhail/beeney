@@ -47,15 +47,16 @@ Route::middleware('auth')->group(function () {
     Route::resource('/reply', ReplyController::class)->except('create');
     Route::resource('/article', ArticleController::class);
 
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
     Route::middleware('role:user')->group(function () {
         Route::get('/dashboard', function () {
             return view('user.dashboard');
         })->name('dashboard');
 
-        Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-        Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-        Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-
+        //Route::middleware('checkUserSubscription')->name('user.')->group(function () {
         Route::middleware('checkUserSubscription')->name('user.')->group(function () {
             Route::get('/predict', [UserPredictController::class, 'index'])->name('predict.index');
             Route::post('/predict/process', [UserPredictController::class, 'prediction_stock'])->name('predict.process');
@@ -75,10 +76,6 @@ Route::middleware('auth')->group(function () {
         Route::view('questions', 'admin.questions.index')->name('questions.index');
 
         Route::get('users', [UserController::class, 'index'])->name('users.index');
-
-        Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-        Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-        Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
         Route::resource('/question', AdminQuestionController::class);
         Route::resource('/reply', AdminReplyController::class);
